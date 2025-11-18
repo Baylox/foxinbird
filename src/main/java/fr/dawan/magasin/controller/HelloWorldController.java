@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloWorldController {
 
-    @Value("${message}")
+    @Value("${message: Message par défaut}")
     public String msg;
 
     @RequestMapping("/hello")
     public String hello(Model model) {
-        model.addAttribute("msg", msg);
-        return "Hello, World!";
+        model.addAttribute("msgvue", msg);
+        return "hello";
     }
 }
