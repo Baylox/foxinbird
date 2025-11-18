@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/exemple")
@@ -62,6 +63,33 @@ public class ExempleController {
     @GetMapping("/testparammap")
     public String testRequestParamMulti(@RequestParam Map<String,String> param, Model model) {
         model.addAttribute("msg", "Le paramètres de requête id=" + param.get("id") + "  nom=" + param.get("nom"));
+        return "exemple";
+    }
+
+    // L’attribut required
+    @GetMapping({ "/testpathop", "/testpathop/{id}" })
+    public String testPathOptionel(@PathVariable(required = false) String id, Model model) {
+        if (id == null) {
+            model.addAttribute("msg", "Paramètre absent");
+        } else {
+            model.addAttribute("msg", "paramètre de chemin id=" + id);
+        }
+        return "exemple";
+    }
+
+    @GetMapping({ "/testpathop2", "/testpathop2/{id}" })
+    public String testPathOptionel2(@PathVariable(required = false) Optional<String> id, Model model) {
+        if (id.isEmpty()) {
+            model.addAttribute("msg", "Paramètre absent");
+        } else {
+            model.addAttribute("msg", "paramètre de chemin id=" + id.get());
+        }
+        return "exemple";
+    }
+
+    @GetMapping("/testparamOp")
+    public String testRequestParamOp(@RequestParam(required=false) String id, Model model) {
+        model.addAttribute("msg", "Le paramètre de requête id=" + id);
         return "exemple";
     }
 }
