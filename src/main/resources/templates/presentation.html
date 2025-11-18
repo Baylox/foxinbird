@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Présentation</title>
+</head>
+    <body>
+
+    <div th:text="|Bonjour, ${prenom} ${nom}|">Bonjour</div>
+
+    <a th:href="@{/presentation/path/john/doe}">
+        Présentation John Doe
+    </a>
+
+    </body>
+</html>
+
