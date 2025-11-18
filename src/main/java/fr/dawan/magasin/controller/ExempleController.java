@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/exemple")
 public class ExempleController {
 
-    @RequestMapping("/")
+    @RequestMapping(value = {"", "/"})
     public String exemple() {
         return "exemple";
     }
