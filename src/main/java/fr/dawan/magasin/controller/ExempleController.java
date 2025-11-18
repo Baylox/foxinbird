@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -45,16 +46,22 @@ public class ExempleController {
         return "exemple";
     }
 
-    @GetMapping("/testpath1/{id:[0-9]+}")
-    public String testPathAmbigue1(@PathVariable String id, Model model) {
-        model.addAttribute("msg", "paramètre de chemin id=" + id);
+    // Paramètre de requête
+    @GetMapping("/testparam")
+    public String testRequestParam(@RequestParam String id, Model model) {
+        model.addAttribute("msg", "Le paramètre de requête id=" + id);
         return "exemple";
     }
 
-    @GetMapping("/testpath1/{nom:[a-zA-Z]+}")
-    public String testPathAmbigue2(@PathVariable String nom, Model model) {
-        model.addAttribute("msg", "paramètre de chemin nom=" + nom);
+    @GetMapping("/testparamulti")
+    public String testRequestParamMulti(@RequestParam String id, @RequestParam String nom, Model model) {
+        model.addAttribute("msg", "Le paramètres de requête id=" + id + "  nom=" + nom);
         return "exemple";
     }
 
+    @GetMapping("/testparammap")
+    public String testRequestParamMulti(@RequestParam Map<String,String> param, Model model) {
+        model.addAttribute("msg", "Le paramètres de requête id=" + param.get("id") + "  nom=" + param.get("nom"));
+        return "exemple";
+    }
 }
