@@ -2,29 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Présentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-    <body>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">Présentation</h1>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info" role="alert">
+                    <div th:if="${prenom != null and prenom != ''}" th:text="|Bonjour, ${prenom} ${nom}|"></div>
+                    <div th:unless="${prenom != null and prenom != ''}">Bonjour</div>
+                </div>
 
-    <div th:if="${prenom != null and prenom != ''}" th:text="|Bonjour, ${prenom} ${nom}|"></div>
-    <div th:unless="${prenom != null and prenom != ''}">Bonjour</div>
+                <div class="mb-4">
+                    <h5>Exemples avec liens</h5>
+                    <a th:href="@{/presentation/path/john/doe}" class="btn btn-success mb-2 d-block">
+                        Présentation John Doe (PathVariable)
+                    </a>
+                    <a th:href="@{/presentation/param(prenom='john', nom='doe')}" class="btn btn-info d-block">
+                        Présentation John Doe (RequestParam)
+                    </a>
+                </div>
 
-    <a th:href="@{/presentation/path/john/doe}">
-        Présentation John Doe (PathVariable)
-    </a>
-    <br><br>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Formulaire de présentation</h5>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/presentation/param}" method="post">
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Prénom</label>
+                                <input type="text" class="form-control" id="prenom" name="prenom" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nom" name="nom" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
 
-    <a th:href="@{/presentation/param(prenom='john', nom='doe')}">
-        Présentation John Doe (RequestParam)
-    </a>
-    <br><br>
+                <hr class="my-4">
+                <a th:href="@{/exemple}" class="btn btn-outline-secondary">Retour aux exemples</a>
+            </div>
+        </div>
+    </div>
 
-    <form th:action="@{/presentation/param}" method="post">
-        <label>Prénom: <input type="text" name="prenom" /></label><br>
-        <label>Nom: <input type="text" name="nom" /></label><br>
-        <button type="submit">Envoyer</button>
-    </form>
-
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
 

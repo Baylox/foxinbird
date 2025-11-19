@@ -2,27 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Exemple Thymeleaf</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div th:text=${val}> texte statique</div>
-    <h4>Accès à un objet</h4>
-    <div th:text="${personne.prenom}">prenom</div>
-    <div th:text="${personne.nom}">nom</div>
-    <div th:text="${personne['prenom']}">prenom</div>
-    <div th:text="${personne['nom']}">nom</div>
-    <div th:text="${personne.prenom} + '  ' + ${personne.nom}">personne</div>
-    <div th:text="| prénom=${personne.prenom} nom=${personne.nom} ${val}|">personne</div>
-    <h4>Accès à un tableau</h4>
-    <div th:text="${t[1]}">deuxieme element du tableau</div>
-    <h4>Accès à une map</h4>
-    <div th:text="${ages['john']}">age</div>
-    <div th:text="${ages.jane}">age</div>
-    <h4>Liens avec paramètres (URL)</h4>
-    <div><a th:href="@{/exemple/testmodel}">exemple test model</a></div>
-    <div><a th:href="@{/exemple/testparam(id=${val})}">exemple de paramètre de requête</a></div>
-    <div><a th:href="@{/exemple/testpath/{v1}(v1=${val})}">exemple de paramètre de chemin</a></div>
-    <div><a th:href="@{/exemple/testpathmulti/{pa}/{na}(pa=${personne.prenom},na=${personne.nom})}">exemple de paramètres de chemin multiple</a></div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h1 class="h3 mb-0">Exemple Thymeleaf</h1>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-primary">
+                    Valeur: <strong th:text="${val}">texte statique</strong>
+                </div>
 
+                <h4 class="mt-4">Accès à un objet</h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">Prénom (point): <span th:text="${personne.prenom}">prenom</span></li>
+                    <li class="list-group-item">Nom (point): <span th:text="${personne.nom}">nom</span></li>
+                    <li class="list-group-item">Prénom (bracket): <span th:text="${personne['prenom']}">prenom</span></li>
+                    <li class="list-group-item">Nom (bracket): <span th:text="${personne['nom']}">nom</span></li>
+                    <li class="list-group-item">Concaténation: <span th:text="${personne.prenom} + '  ' + ${personne.nom}">personne</span></li>
+                    <li class="list-group-item">Littéral: <span th:text="| prénom=${personne.prenom} nom=${personne.nom} ${val}|">personne</span></li>
+                </ul>
+
+                <h4 class="mt-4">Accès à un tableau</h4>
+                <div class="alert alert-info">
+                    Deuxième élément du tableau: <strong th:text="${t[1]}">deuxieme element du tableau</strong>
+                </div>
+
+                <h4 class="mt-4">Accès à une map</h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">Age de John (bracket): <span th:text="${ages['john']}">age</span></li>
+                    <li class="list-group-item">Age de Jane (point): <span th:text="${ages.jane}">age</span></li>
+                </ul>
+
+                <h4 class="mt-4">Liens avec paramètres (URL)</h4>
+                <div class="list-group mb-3">
+                    <a th:href="@{/exemple/testmodel}" class="list-group-item list-group-item-action">Exemple test model</a>
+                    <a th:href="@{/exemple/testparam(id=${val})}" class="list-group-item list-group-item-action">Exemple de paramètre de requête</a>
+                    <a th:href="@{/exemple/testpath/{v1}(v1=${val})}" class="list-group-item list-group-item-action">Exemple de paramètre de chemin</a>
+                    <a th:href="@{/exemple/testpathmulti/{pa}/{na}(pa=${personne.prenom},na=${personne.nom})}" class="list-group-item list-group-item-action">Exemple de paramètres de chemin multiple</a>
+                </div>
+
+                <a th:href="@{/exemple}" class="btn btn-outline-secondary">Retour aux exemples</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
