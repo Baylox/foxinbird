@@ -154,6 +154,24 @@ public class ExempleController {
     }
 
     // Thymeleaf
+    @GetMapping("/testmodel")
+    public String testModel(Model model) {
+        model.addAttribute("val", 10);
+
+        Personne p1=new Personne("Alan","Smithee");
+        model.addAttribute("personne", p1);
+
+        double tab[]= {4.0,5.7,1.23,7.89,3.0};
+        model.addAttribute("t",tab);
+
+        Map<String,Integer> m=new HashMap<>();
+        m.put("john", 34);
+        m.put("jane", 31);
+        m.put("Alan", 50);
+        model.addAttribute("ages",m);
+        return "exemplethymeleaf";
+    }
+
     @GetMapping("/testthymeleaf/{val}")
     public String testThymeleaf(@PathVariable int val, Model model) {
         model.addAttribute("val", val);

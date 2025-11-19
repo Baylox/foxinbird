@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/presentation")
 public class PresentationController {
 
+    @GetMapping
+    public String presentation(Model model) {
+        model.addAttribute("prenom", "");
+        model.addAttribute("nom", "");
+        return "presentation";
+    }
+
     // /presentation/path/john/doe
     @GetMapping("/path/{prenom}/{nom}")
     public String presentationPath(@PathVariable String prenom,@PathVariable String nom, Model model) {

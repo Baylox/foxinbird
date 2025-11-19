@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http:www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Exemple Thymeleaf</title>
@@ -18,5 +18,11 @@
     <h4>Accès à une map</h4>
     <div th:text="${ages['john']}">age</div>
     <div th:text="${ages.jane}">age</div>
+    <h4>Liens avec paramètres (URL)</h4>
+    <div><a th:href="@{/exemple/testmodel}">exemple test model</a></div>
+    <div><a th:href="@{/exemple/testparam(id=${val})}">exemple de paramètre de requête</a></div>
+    <div><a th:href="@{/exemple/testpath/{v1}(v1=${val})}">exemple de paramètre de chemin</a></div>
+    <div><a th:href="@{/exemple/testpathmulti/{pa}/{na}(pa=${personne.prenom},na=${personne.nom})}">exemple de paramètres de chemin multiple</a></div>
+
 </body>
 </html>
