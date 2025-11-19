@@ -15,12 +15,12 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "formations")
-public class Formation implements Serializable {
+public class Formation extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private long id;
+    @Version
+    private int version;
 
     @Column(length = 100, nullable = false)
     private String titre;
