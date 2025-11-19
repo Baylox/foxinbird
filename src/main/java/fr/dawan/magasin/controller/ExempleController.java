@@ -1,14 +1,15 @@
 package fr.dawan.magasin.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+
+import fr.dawan.magasin.entities.Personne;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
+
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class ExempleController {
     }
 
     @GetMapping("/testpathmap/{id}/{nom}")
-    public String testPathMulti(@PathVariable Map<String, String> params, Model model) {
+    public String testPathMap(@PathVariable Map<String, String> params, Model model) {
         model.addAttribute(
                 "msg",
                 "paramètres de chemin id=" + params.get("id") + " nom=" + params.get("nom")
@@ -61,7 +62,7 @@ public class ExempleController {
     }
 
     @GetMapping("/testparammap")
-    public String testRequestParamMulti(@RequestParam Map<String,String> param, Model model) {
+    public String testRequestParamMap(@RequestParam Map<String,String> param, Model model) {
         model.addAttribute("msg", "Le paramètres de requête id=" + param.get("id") + "  nom=" + param.get("nom"));
         return "exemple";
     }
@@ -89,7 +90,60 @@ public class ExempleController {
 
     @GetMapping("/testparamOp")
     public String testRequestParamOp(@RequestParam(required=false) String id, Model model) {
+        model.addAttribute("msg", "Le paramètre de requête id=" + (id != null ? id : "absent"));
+        return "exemple";
+    }
+
+    // default
+    @GetMapping("/testparamdefault")
+    public String testRequestParamDefault(@RequestParam(defaultValue = "42") String id, Model model) {
         model.addAttribute("msg", "Le paramètre de requête id=" + id);
+        return "exemple";
+    }
+
+    // @RequestHeader
+    @GetMapping("/testheader")
+    public String testHeader(@RequestHeader("user-agent") String userAgent, Model model) {
+        model.addAttribute("msg", userAgent);
+        return "exemple";
+    }
+
+    @GetMapping("/testallheader")
+    public String testallHeader(@RequestHeader HttpHeaders headers, Model model) {
+        String res = "";
+        var entry = headers.entrySet();
+
+        for (var e : entry) {
+            String entete = e.getKey() + " : ";
+            for (String v : e.getValue()) {
+                entete += v + " ";
+            }
+            res += entete + " ; ";
+        }
+
+        model.addAttribute("msg", res);
+        return "exemple";
+    }
+
+    // Conversion
+    @GetMapping("/testpathconv/{id}")
+    public String testPathConv(@PathVariable int id, Model model) {
+        model.addAttribute("msg", "id=" + id);
+        return "exemple";
+    }
+
+    @GetMapping("/testparamconv")
+    public String testParamConv(
+            @DateTimeFormat(pattern = "dd-MM-yyyy")
+            @RequestParam LocalDate date,
+            Model model
+    ) {
+        model.addAttribute("msg", "date=" + date.toString());
+        return "exemple";
+    }
+
+    public String testBindPath(@PathVariable Personne p, Model model) {
+        model.addAttribute("msg", "Personne=" + p.toString());
         return "exemple";
     }
 }
