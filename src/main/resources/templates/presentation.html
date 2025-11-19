@@ -6,7 +6,8 @@
 </head>
     <body>
 
-    <div th:text="|Bonjour, ${prenom} ${nom}|">Bonjour</div>
+    <div th:if="${prenom != null and prenom != ''}" th:text="|Bonjour, ${prenom} ${nom}|"></div>
+    <div th:unless="${prenom != null and prenom != ''}">Bonjour</div>
 
     <a th:href="@{/presentation/path/john/doe}">
         Présentation John Doe (PathVariable)

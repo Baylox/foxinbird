@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemple Thymeleaf</title>
+</head>
+<body>
+    <div th:text=${val}> texte statique</div>
+    <h4>Accès à un objet</h4>
+    <div th:text="${personne.prenom}">prenom</div>
+    <div th:text="${personne.nom}">nom</div>
+    <div th:text="${personne['prenom']}">prenom</div>
+    <div th:text="${personne['nom']}">nom</div>
+    <div th:text="${personne.prenom} + '  ' + ${personne.nom}">personne</div>
+    <div th:text="| prénom=${personne.prenom} nom=${personne.nom} ${val}|">personne</div>
+    <h4>Accès à un tableau</h4>
+    <div th:text="${t[1]}">deuxieme element du tableau</div>
+    <h4>Accès à une map</h4>
+    <div th:text="${ages['john']}">age</div>
+    <div th:text="${ages.jane}">age</div>
+</body>
+</html>

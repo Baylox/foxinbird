@@ -8,25 +8,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/presentation")
 public class PresentationController {
 
+    // /presentation/path/john/doe
     @GetMapping("/path/{prenom}/{nom}")
-    public String presentationPath(@PathVariable String prenom, @PathVariable String nom, Model model) {
+    public String presentationPath(@PathVariable String prenom,@PathVariable String nom, Model model) {
         model.addAttribute("prenom", prenom);
         model.addAttribute("nom", nom);
         return "presentation";
     }
 
-    @GetMapping("/param")
-    public String presentationParamGet(@RequestParam String prenom, @RequestParam String nom, Model model) {
+    // /presentation/param?prenom=john&nom=doe
+    @RequestMapping(value="/param", method= { RequestMethod.GET,RequestMethod.POST})
+    public String presentationParam(@RequestParam String prenom, @RequestParam String nom ,Model model) {
         model.addAttribute("prenom", prenom);
         model.addAttribute("nom", nom);
         return "presentation";
     }
-
-    @PostMapping("/param")
-    public String presentationParamPost(@RequestParam String prenom, @RequestParam String nom, Model model) {
-        model.addAttribute("prenom", prenom);
-        model.addAttribute("nom", nom);
-        return "presentation";
-    }
-
 }
