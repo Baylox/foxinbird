@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,8 +39,11 @@ public class Formation extends BaseEntity {
     @Column(length = 15)
     private StatusFormation etat;
 
-
     @Transient
     private transient int nePasPersister;
+
+    @ToString.Exclude // Pour éviter la boucle infinie dans le toString
+    @OneToMany(mappedBy = "formation")
+    private Set<Session> sessions = new HashSet<>();
 
 }
