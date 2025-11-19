@@ -1,90 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exemples Thymeleaf</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(title='Exemples Thymeleaf', content=~{::content})}">
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Exemples Spring MVC & Thymeleaf</h1>
+    <div th:fragment="content">
+        <div class="container mt-4">
+            <h1 class="mb-4">Exemples Spring MVC & Thymeleaf</h1>
 
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
-                <h2 class="h5 mb-0">Paramètres de requête (@RequestParam)</h2>
-            </div>
-            <div class="card-body">
-                <div class="list-group">
-                    <a th:href="@{/exemple/testparam(id='123')}" class="list-group-item list-group-item-action">Test param simple (id=123)</a>
-                    <a th:href="@{/exemple/testparamulti(id='123', nom='dupont')}" class="list-group-item list-group-item-action">Test param multiple (id=123, nom=dupont)</a>
-                    <a th:href="@{/exemple/testparammap(id='123', nom='dupont')}" class="list-group-item list-group-item-action">Test param map (id=123, nom=dupont)</a>
-                    <a th:href="@{/exemple/testparamOp}" class="list-group-item list-group-item-action">Test param optionnel (sans paramètre)</a>
-                    <a th:href="@{/exemple/testparamOp(id='123')}" class="list-group-item list-group-item-action">Test param optionnel (avec id=123)</a>
-                    <a th:href="@{/exemple/testparamdefault}" class="list-group-item list-group-item-action">Test param avec valeur par défaut</a>
-                    <a th:href="@{/exemple/testparamdefault(id='999')}" class="list-group-item list-group-item-action">Test param avec valeur par défaut (id=999)</a>
-                    <a th:href="@{/exemple/testparamsvalue(id='42')}" class="list-group-item list-group-item-action">Test params value (id=42 uniquement)</a>
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">Paramètres de requête (@RequestParam)</h2>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a th:href="@{/exemple/testparam(id='123')}" class="list-group-item list-group-item-action">Test param simple (id=123)</a>
+                        <a th:href="@{/exemple/testparamulti(id='123', nom='dupont')}" class="list-group-item list-group-item-action">Test param multiple (id=123, nom=dupont)</a>
+                        <a th:href="@{/exemple/testparammap(id='123', nom='dupont')}" class="list-group-item list-group-item-action">Test param map (id=123, nom=dupont)</a>
+                        <a th:href="@{/exemple/testparamOp}" class="list-group-item list-group-item-action">Test param optionnel (sans paramètre)</a>
+                        <a th:href="@{/exemple/testparamOp(id='123')}" class="list-group-item list-group-item-action">Test param optionnel (avec id=123)</a>
+                        <a th:href="@{/exemple/testparamdefault}" class="list-group-item list-group-item-action">Test param avec valeur par défaut</a>
+                        <a th:href="@{/exemple/testparamdefault(id='999')}" class="list-group-item list-group-item-action">Test param avec valeur par défaut (id=999)</a>
+                        <a th:href="@{/exemple/testparamsvalue(id='42')}" class="list-group-item list-group-item-action">Test params value (id=42 uniquement)</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card mb-4">
-            <div class="card-header bg-success text-white">
-                <h2 class="h5 mb-0">Paramètres de chemin (@PathVariable)</h2>
-            </div>
-            <div class="card-body">
-                <div class="list-group">
-                    <a th:href="@{/exemple/testpath/42}" class="list-group-item list-group-item-action">Test path simple (id=42)</a>
-                    <a th:href="@{/exemple/testpathmulti/123/dupont}" class="list-group-item list-group-item-action">Test path multiple (id=123, nom=dupont)</a>
-                    <a th:href="@{/exemple/testpathmap/123/dupont}" class="list-group-item list-group-item-action">Test path map (id=123, nom=dupont)</a>
-                    <a th:href="@{/exemple/testpathop}" class="list-group-item list-group-item-action">Test path optionnel (sans paramètre)</a>
-                    <a th:href="@{/exemple/testpathop/42}" class="list-group-item list-group-item-action">Test path optionnel (avec id=42)</a>
-                    <a th:href="@{/exemple/testpathop2}" class="list-group-item list-group-item-action">Test path optionnel 2 (sans paramètre)</a>
-                    <a th:href="@{/exemple/testpathop2/42}" class="list-group-item list-group-item-action">Test path optionnel 2 (avec id=42)</a>
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h2 class="h5 mb-0">Paramètres de chemin (@PathVariable)</h2>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a th:href="@{/exemple/testpath/42}" class="list-group-item list-group-item-action">Test path simple (id=42)</a>
+                        <a th:href="@{/exemple/testpathmulti/123/dupont}" class="list-group-item list-group-item-action">Test path multiple (id=123, nom=dupont)</a>
+                        <a th:href="@{/exemple/testpathmap/123/dupont}" class="list-group-item list-group-item-action">Test path map (id=123, nom=dupont)</a>
+                        <a th:href="@{/exemple/testpathop}" class="list-group-item list-group-item-action">Test path optionnel (sans paramètre)</a>
+                        <a th:href="@{/exemple/testpathop/42}" class="list-group-item list-group-item-action">Test path optionnel (avec id=42)</a>
+                        <a th:href="@{/exemple/testpathop2}" class="list-group-item list-group-item-action">Test path optionnel 2 (sans paramètre)</a>
+                        <a th:href="@{/exemple/testpathop2/42}" class="list-group-item list-group-item-action">Test path optionnel 2 (avec id=42)</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card mb-4">
-            <div class="card-header bg-info text-white">
-                <h2 class="h5 mb-0">Headers (@RequestHeader)</h2>
-            </div>
-            <div class="card-body">
-                <div class="list-group">
-                    <a th:href="@{/exemple/testheader}" class="list-group-item list-group-item-action">Test header user-agent</a>
-                    <a th:href="@{/exemple/testallheader}" class="list-group-item list-group-item-action">Test tous les headers</a>
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h2 class="h5 mb-0">Headers (@RequestHeader)</h2>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a th:href="@{/exemple/testheader}" class="list-group-item list-group-item-action">Test header user-agent</a>
+                        <a th:href="@{/exemple/testallheader}" class="list-group-item list-group-item-action">Test tous les headers</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card mb-4">
-            <div class="card-header bg-warning text-dark">
-                <h2 class="h5 mb-0">Conversions de types</h2>
-            </div>
-            <div class="card-body">
-                <div class="list-group">
-                    <a th:href="@{/exemple/testpathconv/42}" class="list-group-item list-group-item-action">Test conversion path (int)</a>
-                    <a th:href="@{/exemple/testparamconv(date='19-11-2025')}" class="list-group-item list-group-item-action">Test conversion date (19-11-2025)</a>
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h2 class="h5 mb-0">Conversions de types</h2>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a th:href="@{/exemple/testpathconv/42}" class="list-group-item list-group-item-action">Test conversion path (int)</a>
+                        <a th:href="@{/exemple/testparamconv(date='19-11-2025')}" class="list-group-item list-group-item-action">Test conversion date (19-11-2025)</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card mb-4">
-            <div class="card-header bg-danger text-white">
-                <h2 class="h5 mb-0">Thymeleaf avancé</h2>
-            </div>
-            <div class="card-body">
-                <div class="list-group">
-                    <a th:href="@{/exemple/testmodel}" class="list-group-item list-group-item-action">Test Model (objets, tableaux, maps)</a>
-                    <a th:href="@{/exemple/testthymeleaf/10}" class="list-group-item list-group-item-action">Test Thymeleaf avec param (val=10)</a>
+            <div class="card mb-4">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="h5 mb-0">Thymeleaf avancé</h2>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a th:href="@{/exemple/testmodel}" class="list-group-item list-group-item-action">Test Model (objets, tableaux, maps)</a>
+                        <a th:href="@{/exemple/testthymeleaf/10}" class="list-group-item list-group-item-action">Test Thymeleaf avec param (val=10)</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
-        <p><a th:href="@{/presentation}" class="btn btn-outline-primary">Aller à la page Présentation</a></p>
+            <hr>
+            <p><a th:href="@{/presentation}" class="btn btn-outline-primary">Aller à la page Présentation</a></p>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
