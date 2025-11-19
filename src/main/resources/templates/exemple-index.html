@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemples Thymeleaf</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { color: #333; margin-top: 30px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 10px 0; }
+        a { color: #0066cc; text-decoration: none; padding: 5px 10px; display: inline-block; }
+        a:hover { background-color: #f0f0f0; }
+        .section { background-color: #f9f9f9; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Exemples Spring MVC & Thymeleaf</h1>
+
+    <div class="section">
+        <h2>Paramètres de requête (@RequestParam)</h2>
+        <ul>
+            <li><a th:href="@{/exemple/testparam(id='123')}">Test param simple (id=123)</a></li>
+            <li><a th:href="@{/exemple/testparamulti(id='123', nom='dupont')}">Test param multiple (id=123, nom=dupont)</a></li>
+            <li><a th:href="@{/exemple/testparammap(id='123', nom='dupont')}">Test param map (id=123, nom=dupont)</a></li>
+            <li><a th:href="@{/exemple/testparamOp}">Test param optionnel (sans paramètre)</a></li>
+            <li><a th:href="@{/exemple/testparamOp(id='123')}">Test param optionnel (avec id=123)</a></li>
+            <li><a th:href="@{/exemple/testparamdefault}">Test param avec valeur par défaut</a></li>
+            <li><a th:href="@{/exemple/testparamdefault(id='999')}">Test param avec valeur par défaut (id=999)</a></li>
+            <li><a th:href="@{/exemple/testparamsvalue(id='42')}">Test params value (id=42 uniquement)</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Paramètres de chemin (@PathVariable)</h2>
+        <ul>
+            <li><a th:href="@{/exemple/testpath/42}">Test path simple (id=42)</a></li>
+            <li><a th:href="@{/exemple/testpathmulti/123/dupont}">Test path multiple (id=123, nom=dupont)</a></li>
+            <li><a th:href="@{/exemple/testpathmap/123/dupont}">Test path map (id=123, nom=dupont)</a></li>
+            <li><a th:href="@{/exemple/testpathop}">Test path optionnel (sans paramètre)</a></li>
+            <li><a th:href="@{/exemple/testpathop/42}">Test path optionnel (avec id=42)</a></li>
+            <li><a th:href="@{/exemple/testpathop2}">Test path optionnel 2 (sans paramètre)</a></li>
+            <li><a th:href="@{/exemple/testpathop2/42}">Test path optionnel 2 (avec id=42)</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Headers (@RequestHeader)</h2>
+        <ul>
+            <li><a th:href="@{/exemple/testheader}">Test header user-agent</a></li>
+            <li><a th:href="@{/exemple/testallheader}">Test tous les headers</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Conversions de types</h2>
+        <ul>
+            <li><a th:href="@{/exemple/testpathconv/42}">Test conversion path (int)</a></li>
+            <li><a th:href="@{/exemple/testparamconv(date='19-11-2025')}">Test conversion date (19-11-2025)</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Thymeleaf avancé</h2>
+        <ul>
+            <li><a th:href="@{/exemple/testthymeleaf/10}">Test Thymeleaf (val=10)</a></li>
+        </ul>
+    </div>
+
+    <hr>
+    <p><a th:href="@{/presentation}">Aller à la page Présentation</a></p>
+
+</body>
+</html>

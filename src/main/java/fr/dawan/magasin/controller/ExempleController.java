@@ -18,6 +18,11 @@ import java.util.Optional;
 @RequestMapping("/exemple")
 public class ExempleController {
 
+    @GetMapping
+    public String index() {
+        return "exemple-index";
+    }
+
     @GetMapping(value = "/testparamsvalue", params = "id=42")
     public String testParamsValue(Model model) {
         model.addAttribute("msg", "Test attribut params");
