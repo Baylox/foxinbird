@@ -190,5 +190,13 @@ public class ExempleController {
         return "exemplethymeleaf";
     }
 
+    @GetMapping("/testredirect") // Réponse 302
+    public String testRedirect() {
+        return "redirect:/exemple";
+    }
 
+    @GetMapping("/testforward") // Réponse 302
+    public String testForward() {
+        return "forward:/exemple";
+    }
 }
