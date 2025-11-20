@@ -34,6 +34,7 @@ public class Session extends BaseEntity {
     @JoinColumn(name = "formation_id")
     private Formation formation;
 
+    @ToString.Exclude
     @ManyToMany
     private Set<Lieu> lieux=new HashSet<>();
 }

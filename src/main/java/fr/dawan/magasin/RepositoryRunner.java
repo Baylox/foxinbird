@@ -2,15 +2,19 @@ package fr.dawan.magasin;
 
 import fr.dawan.magasin.entities.Formation;
 import fr.dawan.magasin.entities.Monument;
+import fr.dawan.magasin.entities.Session;
 import fr.dawan.magasin.enums.StatusFormation;
 import fr.dawan.magasin.repositories.FormationRepository;
 import fr.dawan.magasin.repositories.MonumentRepository;
+import fr.dawan.magasin.repositories.SessionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -18,6 +22,7 @@ public class RepositoryRunner implements CommandLineRunner {
 
     private final FormationRepository formationRepository;
     private final MonumentRepository monumentRepository;
+    private final SessionRepository sessionRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -99,6 +104,26 @@ public class RepositoryRunner implements CommandLineRunner {
         monuments = monumentRepository.findByDescriptionContaining("gothique");
         for (Monument m : monuments) {
             System.out.println(m.getNom() + " : " + m.getDescription());
+        }
+
+        System.out.println("\n========== TESTS SESSION REPOSITORY ==========\n");
+
+        // Recherche des sessions pour la formation avec id=1
+        System.out.println("--- Sessions pour la formation ID=1 ---");
+        Formation f = formationRepository.findById(1L).orElse(null);
+        if (f != null) {
+            System.out.println("Formation: " + f.getTitre());
+            List<Session> sessions = sessionRepository.findByFormation(f);
+            if (sessions.isEmpty()) {
+                System.out.println("  Aucune session trouvée");
+            } else {
+                for (Session s : sessions) {
+                    System.out.printf("  Session #%d - Lieu: %s | Date: %s | Places: %d%n",
+                        s.getId(), s.getLieu(), s.getDateDebut(), s.getNbPlace());
+                }
+            }
+        } else {
+            System.out.println("Formation non trouvée");
         }
 
     }
