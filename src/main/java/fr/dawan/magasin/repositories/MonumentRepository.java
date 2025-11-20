@@ -1,6 +1,8 @@
 package fr.dawan.magasin.repositories;
 
 import fr.dawan.magasin.entities.Monument;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -38,5 +40,38 @@ public interface MonumentRepository extends JpaRepository<Monument, Long> {
      * @return liste des monuments dont la description contient le mot
      */
     List<Monument> findByDescriptionContaining(String mot);
+
+    /**
+     * Rechercher les monuments en fonction d'une latitude et longitude
+     * Path Expression : coordonnee.lattitude et coordonnee.longitude
+     * @param latitude la latitude
+     * @param longitude la longitude
+     * @return liste des monuments à ces coordonnées
+     */
+    List<Monument> findByCoordonnee_LattitudeAndCoordonnee_Longitude(double latitude, double longitude);
+
+    /**
+     * Rechercher les monuments en fonction de plusieurs pays (paginé)
+     * Path Expression : localisation.pays
+     * @param pays liste des pays
+     * @param pageable objet de pagination
+     * @return page de monuments correspondants
+     */
+    Page<Monument> findByLocalisation_PaysIn(List<String> pays, Pageable pageable);
+
+    /**
+     * Rechercher les 5 monuments les plus anciens
+     * Triés par année de construction croissante, limités à 5 résultats
+     * @return liste des 5 monuments les plus anciens
+     */
+    List<Monument> findTop5ByOrderByAnneeConstructionAsc();
+
+    /**
+     * Rechercher les monuments en fonction d'un intitulé d'étiquette
+     * Path Expression : etiquettes.intitule
+     * @param intitule l'intitulé de l'étiquette
+     * @return liste des monuments avec cette étiquette
+     */
+    List<Monument> findByEtiquettes_Intitule(String intitule);
 
 }
