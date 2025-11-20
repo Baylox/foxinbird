@@ -1,5 +1,5 @@
 package fr.dawan.magasin.enums;
 
 public enum StatusFormation {
-    EN_REDACTION, ACTIVE, DEPRECIE
+    EN_REDACTION, ACTIVE, DEPRECIEE
 }

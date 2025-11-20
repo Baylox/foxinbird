@@ -1,6 +1,7 @@
 package fr.dawan.magasin;
 
 import fr.dawan.magasin.entities.Formation;
+import fr.dawan.magasin.enums.StatusFormation;
 import fr.dawan.magasin.repositories.FormationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,32 @@ public class RepositoryRunner implements CommandLineRunner {
         for(Formation f : formations) {
             System.out.println(f);
         }
+
         formations = formationRepository.findByPrix(new BigDecimal(800));
+        for(Formation f : formations) {
+            System.out.println(f);
+        }
+
+        formations = formationRepository.findByPrixLessThan(new BigDecimal(1000.0));
+        for(Formation f : formations) {
+            System.out.println(f);
+        }
+
+        formations = formationRepository.findByDureeGreaterThan(25);
+        for(Formation f : formations) {
+            System.out.println(f);
+        }
+
+        formations = formationRepository.findByEtatAndPrixLessThan(StatusFormation.ACTIVE, BigDecimal.valueOf(500));
+        for (Formation f : formations) {
+            System.out.println(f);
+        }
+
+        formations = formationRepository.findByEtatOrPrixLessThan(StatusFormation.DEPRECIEE, BigDecimal.valueOf(500));
+        for (Formation f : formations) {
+            System.out.println(f);
+        }
+
     }
 
 }
