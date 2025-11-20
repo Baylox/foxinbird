@@ -1,5 +1,6 @@
-package fr.dawan.magasin.entities;
+package fr.dawan.magasin.formation.entities;
 
+import fr.dawan.magasin.shared.entities.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

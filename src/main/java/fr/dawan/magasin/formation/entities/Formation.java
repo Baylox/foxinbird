@@ -1,5 +1,6 @@
-package fr.dawan.magasin.entities;
+package fr.dawan.magasin.formation.entities;
 
+import fr.dawan.magasin.shared.entities.BaseEntity;
 import fr.dawan.magasin.enums.StatusFormation;
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,7 +43,7 @@ public class Formation extends BaseEntity {
     @Transient
     private transient int nePasPersister;
 
-    @ToString.Exclude // Pour éviter la boucle infinie dans le toString
+    @ToString.Exclude
     @OneToMany(mappedBy = "formation")
     private Set<Session> sessions = new HashSet<>();
 

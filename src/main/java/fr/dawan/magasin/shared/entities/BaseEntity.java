@@ -1,4 +1,4 @@
-package fr.dawan.magasin.entities;
+package fr.dawan.magasin.shared.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,7 +20,7 @@ public abstract class BaseEntity implements Serializable {
     private Long id;
 
     @EqualsAndHashCode.Exclude
-    @Setter(value= AccessLevel.NONE) // On n'a pas de setter pour la version
+    @Setter(value= AccessLevel.NONE)
     @Version
     private int version;
 
