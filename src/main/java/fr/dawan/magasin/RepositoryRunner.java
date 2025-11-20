@@ -63,6 +63,11 @@ public class RepositoryRunner implements CommandLineRunner {
             System.out.println(f);
         }
 
+        formations = formationRepository.findByTitreStartsWith("Java");
+        for (Formation f : formations) {
+            System.out.println(f);
+        }
+
     }
 
 }
