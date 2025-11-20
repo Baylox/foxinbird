@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -31,4 +33,7 @@ public class Session extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "formation_id")
     private Formation formation;
+
+    @ManyToMany
+    private Set<Lieu> lieux=new HashSet<>();
 }
