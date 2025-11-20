@@ -30,7 +30,7 @@ public class Monument extends BaseEntity {
     private String description;
 
     @Lob
-    @Column(columnDefinition = "BLOB")
+    @Column(columnDefinition = "BLOB", length = 65000)
     private byte[] photo;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -41,6 +41,7 @@ public class Monument extends BaseEntity {
     @JoinColumn(name = "localisation_id")
     private Localisation localisation;
 
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
         name = "monument_etiquette",

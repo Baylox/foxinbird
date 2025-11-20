@@ -24,6 +24,7 @@ public class Visite extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "monument_id")
+    @ToString.Exclude
     private Monument monument;
 
 }

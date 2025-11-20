@@ -20,6 +20,7 @@ public class Etiquette extends BaseEntity {
     @Column(nullable = false, length = 60)
     private String intitule;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "etiquettes")
     private List<Monument> monuments = new ArrayList<>();
 

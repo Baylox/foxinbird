@@ -20,7 +20,8 @@ public class Coordonnee extends BaseEntity {
     @Column(nullable = false)
     private double lattitude;
 
-    @OneToOne(mappedBy = "coordonnee")
+    @ToString.Exclude
+    @OneToOne(mappedBy = "coordonnee") // Il faut un MappedBy car la clé étrangère est dans Monument (OnetoOne pour ne pas créer une deuxième relation)
     private Monument monument;
 
 }
