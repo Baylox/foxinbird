@@ -4,6 +4,8 @@ import fr.dawan.magasin.entities.Monument;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -73,5 +75,42 @@ public interface MonumentRepository extends JpaRepository<Monument, Long> {
      * @return liste des monuments avec cette étiquette
      */
     List<Monument> findByEtiquettes_Intitule(String intitule);
+
+    // ========== REQUÊTES JPQL PERSONNALISÉES ==========
+
+    /**
+     * Compter le nombre de monuments par pays
+     * Requête JPQL avec agrégation
+     * @param pays le nom du pays
+     * @return le nombre de monuments dans ce pays
+     */
+    @Query("SELECT COUNT(m) FROM Monument m WHERE m.localisation.pays = :pays")
+    Long countMonumentsByPays(@Param("pays") String pays);
+
+    /**
+     * Récupérer les monuments avec leur prix de visite dans une fourchette
+     * Requête JPQL avec paramètres nommés
+     * @param prixMin prix minimum
+     * @param prixMax prix maximum
+     * @return liste des monuments dans cette fourchette de prix
+     */
+    @Query("SELECT m FROM Monument m WHERE m.prixVisite BETWEEN :prixMin AND :prixMax ORDER BY m.prixVisite ASC")
+    List<Monument> findMonumentsByPrixVisiteRange(@Param("prixMin") double prixMin, @Param("prixMax") double prixMax);
+
+    /**
+     * Récupérer les monuments avec leurs coordonnées (projection)
+     * Requête JPQL avec jointure
+     * @return liste des monuments avec coordonnées non nulles
+     */
+    @Query("SELECT m FROM Monument m JOIN m.coordonnee c WHERE c IS NOT NULL")
+    List<Monument> findMonumentsWithCoordinates();
+
+    /**
+     * Calculer le prix moyen de visite par pays
+     * Requête JPQL avec agrégation et GROUP BY (retourne Object[])
+     * @return liste de tableaux [pays, prixMoyen]
+     */
+    @Query("SELECT m.localisation.pays, AVG(m.prixVisite) FROM Monument m GROUP BY m.localisation.pays")
+    List<Object[]> findAveragePriceByCountry();
 
 }
