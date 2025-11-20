@@ -10,6 +10,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 
     List<Session> findByFormation(Formation formation);
 
-    // Path Expression
+    // TODO: Ajouter d'autres méthodes ici si nécessaire
+
 }
 
