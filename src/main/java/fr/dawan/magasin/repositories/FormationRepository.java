@@ -31,5 +31,7 @@ public interface FormationRepository extends JpaRepository<Formation, Long> {
     // In => doit correspondre à dans une des valeurs proposées
     List<Formation> findByPrixIn(BigDecimal... prices);
 
+    // StartsWith => commence par
+    List<Formation> findByTitreStartsWith(String prefix);
 
 }
