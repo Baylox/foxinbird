@@ -48,6 +48,16 @@ public class RepositoryRunner implements CommandLineRunner {
             System.out.println(f);
         }
 
+        formations = formationRepository.findByPrixBetween(BigDecimal.valueOf(100), BigDecimal.valueOf(1000));
+        for (Formation f : formations) {
+            System.out.println(f);
+        }
+
+        formations = formationRepository.findByPrixIn(BigDecimal.valueOf(850), BigDecimal.valueOf(1450));
+        for (Formation f : formations) {
+            System.out.println(f);
+        }
+
     }
 
 }

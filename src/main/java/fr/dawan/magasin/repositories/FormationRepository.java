@@ -25,4 +25,11 @@ public interface FormationRepository extends JpaRepository<Formation, Long> {
     // Or -> combiner plusieurs conditions avec l'opérateur or
     List<Formation> findByEtatOrPrixLessThan(StatusFormation etat, BigDecimal prixMax);
 
+    // Between => entre deux valeurs (inclus)
+    List<Formation> findByPrixBetween(BigDecimal prixMin, BigDecimal prixMax);
+
+    // In => doit correspondre à dans une des valeurs proposées
+    List<Formation> findByPrixIn(BigDecimal... prices);
+
+
 }
