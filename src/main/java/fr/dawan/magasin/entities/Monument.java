@@ -1,4 +1,4 @@
-package fr.dawan.magasin.tourisme.entities;
+package fr.dawan.magasin.entities;
 
 import fr.dawan.magasin.shared.entities.BaseEntity;
 import jakarta.persistence.*;

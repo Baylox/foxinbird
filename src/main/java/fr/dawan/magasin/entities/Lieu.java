@@ -1,4 +1,4 @@
-package fr.dawan.magasin.formation.entities;
+package fr.dawan.magasin.entities;
 
 import fr.dawan.magasin.shared.entities.BaseEntity;
 import jakarta.persistence.Column;

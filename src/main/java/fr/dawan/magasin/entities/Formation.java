@@ -1,11 +1,10 @@
-package fr.dawan.magasin.formation.entities;
+package fr.dawan.magasin.entities;
 
 import fr.dawan.magasin.shared.entities.BaseEntity;
 import fr.dawan.magasin.enums.StatusFormation;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,9 +20,6 @@ import java.util.Set;
 public class Formation extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @Version
-    private int version;
 
     @Column(length = 100, nullable = false)
     private String titre;

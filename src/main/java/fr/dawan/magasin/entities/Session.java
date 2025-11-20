@@ -1,4 +1,4 @@
-package fr.dawan.magasin.formation.entities;
+package fr.dawan.magasin.entities;
 
 import fr.dawan.magasin.shared.entities.BaseEntity;
 import jakarta.persistence.*;
@@ -24,7 +24,7 @@ public class Session extends BaseEntity {
     @Column(length = 50, nullable = false)
     private String lieu;
 
-    @Column(nullable = false)
+    @Column(name = "date", nullable = false)
     private LocalDate dateDebut;
 
     @Column(name="nb_place")
