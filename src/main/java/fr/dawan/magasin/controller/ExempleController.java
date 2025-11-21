@@ -228,10 +228,16 @@ public class ExempleController {
         return "exemple";
     }
 
+    @GetMapping("/testflash")
     public String testFlashAttribute(RedirectAttributes rAtt) {
-        rAtt.addFlashAttribute("msg", "flash");
-        return "redirect:/";
+        rAtt.addFlashAttribute("msg", "Vous venez d'être redirigé avec un message flash !");
+        return "redirect:/exemple/cibleflash";
     }
 
+    @GetMapping("/cibleflash")
+    public String cibleFlashAttribute(@ModelAttribute("msg") String msg, Model model) {
+        model.addAttribute("msg", "Message flash reçu : " + msg);
+        return "exemple";
+    }
 
 }
