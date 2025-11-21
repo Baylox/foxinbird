@@ -7,6 +7,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -14,6 +18,7 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/monument")
 public class MonumentController {
 
     // Autowired
@@ -24,6 +29,25 @@ public class MonumentController {
         List<Monument> monuments = monumentRepository.findAll();
         model.addAttribute("monuments", monuments);
         return "monument";
+    }
+
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("monument", new Monument());
+        return "ajoutMonument";
+    }
+
+    @PostMapping("/add")
+    public String addMonument(@ModelAttribute Monument monument, RedirectAttributes rAtt) {
+        try {
+            monumentRepository.save(monument);
+            rAtt.addFlashAttribute("msg", "Monument ajouté avec succès");
+            rAtt.addFlashAttribute("msgType", "success");
+        } catch (Exception e) {
+            rAtt.addFlashAttribute("msg", "Erreur lors de l'ajout du monument");
+            rAtt.addFlashAttribute("msgType", "danger");
+        }
+        return "redirect:/monument/monuments";
     }
 
 }
