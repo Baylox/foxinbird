@@ -6,6 +6,8 @@ import fr.dawan.magasin.repositories.MonumentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,9 +40,14 @@ public class MonumentController {
     }
 
     @PostMapping("/add")
-    public String addMonument(@ModelAttribute Monument monument, RedirectAttributes rAtt) {
+    public String addMonument(@Valid @ModelAttribute Monument monument,
+                              BindingResult result,
+                              RedirectAttributes rAtt) {
+        if (result.hasErrors()) {
+            return "ajoutMonument";
+        }
         try {
-            monumentRepository.save(monument);
+            monumentRepository.saveAndFlush(monument);
             rAtt.addFlashAttribute("msg", "Monument ajouté avec succès");
             rAtt.addFlashAttribute("msgType", "success");
         } catch (Exception e) {

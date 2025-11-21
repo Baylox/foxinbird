@@ -2,6 +2,7 @@ package fr.dawan.magasin.entities;
 
 import fr.dawan.magasin.shared.entities.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -17,12 +18,17 @@ import java.util.List;
 @Table(name = "monuments")
 public class Monument extends BaseEntity {
 
+    @NotBlank(message = "Le nom est obligatoire")
+    @Size(min = 2, max = 150, message = "Le nom doit contenir entre 2 et 150 caractères")
     @Column(nullable = false, length = 150)
     private String nom;
 
+    @Min(value = 0, message = "Le prix doit être positif")
     @Column(nullable = false)
     private double prixVisite;
 
+    @Min(value = 0, message = "L'année doit être positive")
+    @Max(value = 2100, message = "L'année ne peut pas dépasser 2100")
     @Column(nullable = false)
     private int anneeConstruction;
 

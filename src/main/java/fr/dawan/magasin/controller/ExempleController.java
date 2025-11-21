@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -238,6 +240,12 @@ public class ExempleController {
     public String cibleFlashAttribute(@ModelAttribute("msg") String msg, Model model) {
         model.addAttribute("msg", "Message flash reçu : " + msg);
         return "exemple";
+    }
+
+    // Exception
+    @GetMapping("/genioexception")
+    public void genIOException() throws SQLException {
+        throw new SQLException("Exception générée volontairement");
     }
 
 }
