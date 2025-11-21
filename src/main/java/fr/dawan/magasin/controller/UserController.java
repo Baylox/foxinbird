@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @AllArgsConstructor
@@ -39,4 +42,33 @@ public class UserController {
         return "redirect:/admin/users";
     }
 
+    @GetMapping("/export")
+    public void exportUserCsv(HttpServletResponse response) {
+        try {
+            response.setContentType("text/csv");
+            response.setHeader("Content-Disposition", "attachment; filename=users.csv");
+
+            List<User> users = userRepository.findAll();
+            PrintWriter writer = response.getWriter(); // Récupération du flux de sortie
+
+            // En-tête CSV
+            writer.println("ID,Prénom,Nom,Date de naissance,Email,Actif");
+
+            // Données
+            for (User user : users) {
+                writer.println(String.format("%d,%s,%s,%s,%s,%s",
+                        user.getId(),
+                        user.getPrenom(),
+                        user.getNom(),
+                        user.getDateNaissance(),
+                        user.getEmail(),
+                        user.isEnable() ? "Oui" : "Non"
+                ));
+            }
+
+            writer.flush();
+        } catch (IOException e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
