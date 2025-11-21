@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(title='Upload', content=~{::content})}">
+<body>
+    <div th:fragment="content">
+        <div class="container mt-4">
+            <h1 class="mb-4">Upload de fichier</h1>
+
+            <div th:if="${msg}" th:class="'alert alert-' + ${msgType}" role="alert">
+                <span th:text="${msg}"></span>
+            </div>
+
+            <form th:action="@{/upload}" method="post" enctype="multipart/form-data" class="card p-4">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Sélectionner un fichier</label>
+                    <input type="file" class="form-control" id="file" name="file" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Uploader</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
