@@ -243,9 +243,13 @@ public class ExempleController {
     }
 
     // Exception
-    @GetMapping("/genioexception")
-    public void genIOException() throws SQLException {
+    @GetMapping("/sqlexception")
+    public void genSQLException() throws SQLException {
         throw new SQLException("Exception générée volontairement");
     }
 
+    @GetMapping("/ioexception")
+    public void genIOException() throws IOException {
+        throw new IOException("Exception générée volontairement");
+    }
 }
