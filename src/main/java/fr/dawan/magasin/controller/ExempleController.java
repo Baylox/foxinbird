@@ -252,4 +252,10 @@ public class ExempleController {
     public void genIOException() throws IOException {
         throw new IOException("Exception générée volontairement");
     }
+
+    @GetMapping("/403")
+    public void genForbidden() {
+        throw new org.springframework.web.server.ResponseStatusException(
+                org.springframework.http.HttpStatus.FORBIDDEN, "Accès refusé");
+    }
 }
