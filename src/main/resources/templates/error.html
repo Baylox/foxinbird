@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(title='Erreur', content=~{::content})}">
+<body>
+    <div th:fragment="content">
+        <div class="container mt-4">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading" th:text="${errorType} ?: 'Erreur'">Erreur</h4>
+                <p th:text="${errorMessage} ?: 'Une erreur est survenue'">Message d'erreur</p>
+                <hr>
+                <a th:href="@{/}" class="btn btn-outline-danger">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
