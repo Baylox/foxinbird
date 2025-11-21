@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(title='Test Liens Variables', content=~{::content})}">
+<body>
+    <div th:fragment="content">
+        <div class="container mt-4">
+            <h1 class="mb-4">Test Liens avec Variables</h1>
+
+            <p><a th:href="@{/exemple/testparam(id=${dateJour})}" class="btn btn-secondary">Test avec dateJour</a></p>
+            <p><a th:href="@{/exemple/testparam(id=${personne1})}" class="btn btn-secondary">Test avec personne</a></p>
+            <p><a th:href="@{/exemple/testmodelattrparam}" class="btn btn-secondary">Test ModelAttribute param</a></p>
+
+            <hr>
+            <p><a th:href="@{/exemple}" class="btn btn-outline-primary">Retour aux exemples</a></p>
+        </div>
+    </div>
+</body>
+</html>

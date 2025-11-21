@@ -7,9 +7,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -190,13 +192,46 @@ public class ExempleController {
         return "exemplethymeleaf";
     }
 
+    // Redirect et Forward
     @GetMapping("/testredirect") // Réponse 302
     public String testRedirect() {
         return "redirect:/exemple";
     }
 
-    @GetMapping("/testforward") // Réponse 302
+    @GetMapping("/testforward") // Réponse coté serveur
     public String testForward() {
         return "forward:/exemple";
     }
+
+    // @ModelAttribute sur une méthode
+    // Avant chaque méthode de ce controller on va ajouter au model l'attribut "dateJour"
+
+    @ModelAttribute("dateJour")
+    public LocalDateTime testModelAttribute() {
+        return LocalDateTime.now();
+    }
+
+    @ModelAttribute
+    public void testModelAttribute2(Model model) {
+        model.addAttribute("personne1", new Personne("Alan","Smith"));
+    }
+
+    @GetMapping("/liens")
+    public String testLiens() {
+        return "exemple-liens";
+    }
+
+    // @ModelAttribute sur un paramètre de méthode
+    @GetMapping("/testmodelattrparam")
+    public String testModelAttributeParam(@ModelAttribute("personne1") Personne p, Model model) {
+        model.addAttribute("msg", "Personne=" + p.toString());
+        return "exemple";
+    }
+
+    public String testFlashAttribute(RedirectAttributes rAtt) {
+        rAtt.addFlashAttribute("msg", "flash");
+        return "redirect:/";
+    }
+
+
 }
